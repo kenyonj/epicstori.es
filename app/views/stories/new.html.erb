@@ -1,0 +1,5 @@
+<%= form_for @story do |form| %>
+  <%= render 'errors', target: @story %>
+  <%= form.text_field :title, placeholder: 'Story Title' %>
+  <%= form.submit 'Start Story' %>
+<% end %>
