@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Epicstories</title>
+  <title>EpicStories</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if signed_in? %>
+    <%= button_to "Sign out", session_path, method: :delete %>
+  <% else %>
+    <%= form_for :session, url: session_path, html: { id: "new_session" } do |form| %>
+      <%= form.text_field :email_or_username, placeholder: "Email or username" %>
+      <%= form.password_field :password, placeholder: "Password" %>
+      <%= form.submit 'Sign in' %>
+    <% end %>
+  <% end %>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>
