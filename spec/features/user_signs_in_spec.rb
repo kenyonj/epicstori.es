@@ -1,31 +1,30 @@
 require 'spec_helper'
 
 feature 'User signs in' do
-  scenario 'with valid information' do
-    username = 'Tester'
+  scenario 'with email address and correct password' do
+    create(:user, username: 'justin', email: 'test@test.com', password_digest: 'password')
+    visit root_path
 
-    sign_up_via_form(username)
+    within '#new_session' do
+      fill_in 'Email or username', with: 'test@test.com'
+      fill_in 'Password', with: 'password'
+    end
+    click_button 'Sign in'
 
-    expect(page).to have_content "Welcome #{username}"
+    expect(page).to have_content "Welcome justin"
     expect(page).to have_content "Sign Out"
   end
 
-  scenario 'with invalid information and sees errors' do
-    sign_up_via_form
-
-    expect(page).to have_css "#new_user"
-    expect(page).to have_content "Username can't be blank"
-  end
-
-  def sign_up_via_form(username='')
+  scenario 'with email address and incorrect password' do
     visit root_path
-    within '#new_user' do
-      fill_in 'Email', with: 'test@test.com'
-      fill_in 'Username', with: username
-      fill_in 'Password', with: 'password'
-      fill_in 'First Name', with: 'Test'
-      fill_in 'Last Name', with: 'Testing'
+
+    within '#new_session' do
+      fill_in 'Email or username', with: 'foo@bar.com'
+      fill_in 'Password', with: '12345'
     end
-    click_button 'Sign up'
+
+    click_button 'Sign in'
+    expect(page).to have_content "Email"
+    expect(page).to have_content "Password"
   end
 end

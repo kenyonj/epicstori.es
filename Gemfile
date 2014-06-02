@@ -8,7 +8,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-gem 'monban'
+gem 'monban', git: 'https://github.com/halogenandtoast/monban'
+gem 'monban-generators'
 
 group :doc do
   gem 'sdoc', require: false
@@ -18,5 +19,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'pry-rails'
 end
 

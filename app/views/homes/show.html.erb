@@ -1,9 +1,15 @@
 <%= form_for @user do |form| %>
   <%= render 'errors', target: @user %>
-  <%= form.text_field :email, placeholder: 'Email' %>
-  <%= form.text_field :username, placeholder: 'Username' %>
-  <%= form.text_field :first_name, placeholder: 'First Name' %>
-  <%= form.text_field :last_name, placeholder: 'Last Name' %>
+  <%= form.text_field :email, placeholder: "Email" %>
+  <%= form.text_field :username, placeholder: "Username" %>
+  <%= form.text_field :first_name, placeholder: "First Name" %>
+  <%= form.text_field :last_name, placeholder: "Last Name" %>
   <%= form.password_field :password, placeholder: "Password" %>
   <%= form.submit 'Sign up' %>
+<% end %>
+
+<%= form_for :session, url: session_path, html: { id: "new_session" } do |form| %>
+  <%= form.text_field :email_or_username, placeholder: "Email or username" %>
+  <%= form.password_field :password, placeholder: "Password" %>
+  <%= form.submit 'Sign in' %>
 <% end %>
