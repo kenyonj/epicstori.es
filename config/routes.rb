@@ -7,5 +7,5 @@ Epicstories::Application.routes.draw do
 
   resource :session, only: [:create, :destroy]
 
-  resources :stories, only: [:new, :create, :show]
+  resources :stories, only: [:new, :create, :show, :index]
 end

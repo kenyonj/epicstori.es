@@ -1,6 +1,10 @@
 class StoriesController < ApplicationController
   respond_to :html
 
+  def index
+    @stories = Story.active
+  end
+
   def new
     @story = Story.new
   end
